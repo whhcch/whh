@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hwua.dao.IUsersDao">
+	<resultMap type="Users" id="nUsers">
+		<id column="uid" property="uid" />
+		<result column="username" property="uname" />
+		<result column="birthday" property="birthday" />
+		<result column="sex" property="sex" />
+		<result column="address" property="address" />
+		<collection property="ordersList" ofType="Orders">
+			<id column="oid" property="oid" />
+			<result column="number" property="number" />
+			<result column="createtime" property="createtime" />
+			<result column="note" property="note" />
+		</collection>
+	</resultMap>
+	<sql id="usersColumns">
+		${alias}.uid,${alias}.username,${alias}.birthday,${alias}.sex,${alias}.address
+	</sql>
+	<select id="getAllUsers" resultMap="nUsers">
+		select * FROM users u,orders o where u.uid=o.user_id
+	</select>
+	
+	<select id="getUsersByUid" parameterType="Integer" resultMap="nUsers">
+		select 
+		<include refid="usersColumns"><property name="alias" value="u"/></include>
+		from users u where u.uid=#{uid}
+	</select>
+</mapper>

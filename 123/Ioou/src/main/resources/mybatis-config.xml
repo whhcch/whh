@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<!-- 加载 db.properties配置信息 -->
+	<properties resource="db.properties"></properties>
+	<!-- typeAliases 类型别名 实体类型 -->
+	<typeAliases>
+		<typeAlias alias="Items" type="com.hwua.entity.Items" />
+		<typeAlias alias="Orderdetail" type="com.hwua.entity.Orderdetail" />
+		<typeAlias alias="Orders" type="com.hwua.entity.Orders" />
+		<typeAlias alias="Users" type="com.hwua.entity.Users" />
+	</typeAliases>
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC" />
+			<dataSource type="POOLED">
+				<property name="driver" value="${driver}" />
+				<property name="url" value="${url}" />
+				<property name="username" value="${username}" />
+				<property name="password" value="${password}" />
+			</dataSource>
+		</environment>
+	</environments>
+	<mappers>
+		<mapper resource="com/hwua/mapper/ItemsMapper.xml" />
+		<mapper resource="com/hwua/mapper/OrderdetailMapper.xml" />
+		<mapper resource="com/hwua/mapper/OrdersMapper.xml" />
+		<mapper resource="com/hwua/mapper/UsersMapper.xml" />
+	</mappers>
+</configuration>
